@@ -30,3 +30,8 @@ def place_is_visited(request):
         place.save()
 
     return redirect('place_list')
+
+def place(request, pk):
+    if request.method == 'POST':
+        place = get_object_or_404(Place, pk=pk)
+        return render(request, 'travel_wishlist/place.html')
