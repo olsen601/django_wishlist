@@ -17,15 +17,18 @@
     "pk":3,
     "fields":{
       "name":"San Francisco",
-      "visited":"True"
+      "visited":"True",
+      "visited_date":"2015-08-16 00:00:00",
+      "note":"text text text"
     }
   },
-
   { "model":"travel_wishlist.place",
     "pk":4,
     "fields":{
       "name":"Moab",
-      "visited":"True"
+      "visited":"True",
+      "visited_date":"2016-06-12 00:00:00",
+      "note":"text text text text"
     }
   }
 ]

@@ -4,13 +4,15 @@
 
 <h2>{{ place.name }}</h2>
 
-<h3>Notes</h3>
+<h3>Date</h3>
 
 {% if place.visited_date %}
   <p>{{ place.visited_date }}</p>
 {% else %}
   <p>No date selected</p>
 {% endif %}
+
+<h3>Notes</h3>
 
 {% if place.note %}
   <p>{{ place.note }}</p>
@@ -21,7 +23,10 @@
 <form action="{% url 'place' pk=place.pk %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
   {{ rp_form }}
-<button type="submit">Save</button>
+<button id="place_save_form_button" type="submit">Save</button>
 </form>
 
 {% endblock %}
+
+<!-- structured to show name of the place object then the date and notes
+if they exist or a default message -->

@@ -4,10 +4,10 @@
 <h1>Places you have visited</h1>
 
 {% if visited %}
-
+<!-- shows links to the specific place object if visited -->
 <ul>
   {% for place in visited %}
-    <li><a href="{% url 'place' pk=place.pk %}">{{ place.name }}</a></li>
+    <li><a id="place-{{ place.pk }}" href="{% url 'place' pk=place.pk %}">{{ place.name }}</a></li>
     {% csrf_token %}
   {% endfor %}
 </ul>

@@ -22,3 +22,11 @@ class TestWishList(TestCase):
         data_rendered = list(response.context['places'])
         data_expected = list(Place.objects.filter(visited=False))
         self.assertCountEqual(data_rendered, data_expected)
+
+    def test_view_place(self):
+        response = self.client.get(reverse('place', kwargs={'pk':3}))
+        self.assertTemplateUsed(response, 'travel_wishlist/place.html')
+
+        data_rendered = response.context['place']
+        data_expected = Place.objects.get(pk=3)
+        self.assertEqual(data_rendered, data_expected)

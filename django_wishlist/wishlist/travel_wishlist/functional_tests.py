@@ -40,3 +40,31 @@ class FunctionalityTests(LiveServerTestCase):
         assert 'New York' in self.browser.page_source
 
         assert 'Denver' in self.browser.page_source
+
+class PlaceTest(LiveServerTestCase):
+    #doesn't work and I'm not sure why
+
+    def setUp(self):
+        self.browser = webdriver.Chrome()
+        self.browser.implicitly_wait(3)
+
+    def tearDown(self):
+        self.browser.quit()
+
+    def test_add_note_page(self):
+        self.browser.get(self.live_server_url)
+        visited = self.browser.find_element_by_id('places_visited_link')
+        visited.click()
+
+        wait_for_place_three = self.browser.find_element_by_id('place-3')
+        wait_for_place_three.click()
+
+        wait_for_date = self.browser.find_element_by_name('visited_date')
+        wait_for_date.send_keys('2015-04-03 00:00:00')
+        wait_for_note = self.browser.find_element_by_name('note')
+        wait_for_note.send_keys('text')
+
+        save = self.browser.find_element_by_id('place_save_form_button')
+        save.click()
+
+        assert 'text' in self.browser.page_source
