@@ -44,6 +44,8 @@ class FunctionalityTests(LiveServerTestCase):
 class PlaceTest(LiveServerTestCase):
     #doesn't work and I'm not sure why
 
+    fixtures = ['test_places']
+
     def setUp(self):
         self.browser = webdriver.Chrome()
         self.browser.implicitly_wait(3)
@@ -60,11 +62,11 @@ class PlaceTest(LiveServerTestCase):
         wait_for_place_three.click()
 
         wait_for_date = self.browser.find_element_by_name('visited_date')
-        wait_for_date.send_keys('2015-04-03 00:00:00')
+        wait_for_date.clear()   # this place already has a date visited and there's already text in the date input. 
+        wait_for_date.send_keys('2015-04-03 00:00:00')  # if there's already text, this will be appended to it.
         wait_for_note = self.browser.find_element_by_name('note')
-        wait_for_note.send_keys('text')
-
+        wait_for_note.send_keys('a more unique string of text')   # it's possible 'text' is already in the page, common word in HTML pages
         save = self.browser.find_element_by_id('place_save_form_button')
         save.click()
 
-        assert 'text' in self.browser.page_source
+        assert 'a more unique string of text' in self.browser.page_source
